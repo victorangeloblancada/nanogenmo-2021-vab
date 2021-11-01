@@ -1,4 +1,4 @@
-# NaNoGenMo 2021
+# Curious Tangents (NaNoGenMo 2021 Entry)
 This is the repository for my 2021 entry to NaNoGenMo (National Novel Generation Month).
 
 Inspired by [this Abstruse Goose comic](https://abstrusegoose.com/98):
