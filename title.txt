@@ -1,0 +1,15 @@
+---
+title:
+- type: main
+  text: Curious Tangents
+- type: subtitle
+  text: A Comedy
+creator:
+- role: author
+  text: Victor Blancada
+rights: © 2021 Victor Blancada
+cover-image: Curious Tangents.jpg
+css: epub.css
+language: en-US
+description: A school has developed an AI teacher to handle classes. The students' frequent questions often throw the lesson off plan. Hilarity ensues.
+---

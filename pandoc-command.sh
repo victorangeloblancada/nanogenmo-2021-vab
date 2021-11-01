@@ -1,0 +1,1 @@
+pandoc -o "Curious Tangents.epub" --epub-embed-font="Fonts/*.otf" title.txt "NaNoGenMo.md" "About The Book.md" "About The Author.md"
