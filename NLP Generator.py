@@ -29,22 +29,23 @@ rules = {
     'return': '"#interjection#, #returning#',
     'bell': 'The bell #rang#.\n\n"That\'s all the time we have. I hope you learned something today," the #teacher# #said##adverb#.\n\nThe #students# #leaveaction# the room#adverb#.',
     'interjection': ['Now', 'Okay', 'Well then', 'Alright', 'So', 'Now then'],
-    'hello': ['hello', 'greetings', 'good morning', 'good afternoon'],
+    'hello': ['hello', 'greetings', 'good morning', 'good afternoon', 'welcome', 'hello and welcome'],
     'said': ['said', 'explained', 'declared', 'announced', 'noted', 'breathed', 'seethed', 'elaborated', 'muttered', 'murmured', 'sang'],
     'asked': ['asked', 'queried', 'quizzed','raised', 'questioned', 'demanded', 'wondered', 'said', 'piped up', 'blurted', 'interjected'],
     'continued': ['continued', 'carried on', 'proceeded'],
-    'paused': ['paused', 'looked around', 'halted', 'took a breath'],
+    'paused': ['paused', 'looked around', 'halted', 'took a breath', 'stopped'],
     'expecting': ['expecting', 'waiting for', 'anticipating', 'listening for'],
     'question': ['question', 'query'],
     'ignored': ['ignored', 'disregarded', 'paid no attention to', 'paid no heed to'],
-    'returning': ['getting back to ', 'turning back our attention to ', 'going back to ', 'back again to '],
+    'returning': ['returning to ', 'getting back to ', 'turning back our attention to ', 'going back to ', 'back again to '],
     'discussing': ['discussing', 'talking about', 'learning about', 'studying', 'covering'],
     'rang': ['rang', 'sounded', 'blared'],
     'student': ['student', 'pupil', 'boy', 'girl'],
     'students': ['class', 'students', 'pupils'],
-    'teacheraction': ['nod', 'smile', 'grin', 'smirk', 'clap of his hands', 'slight jig'],
+    'teacheraction': ['nod', 'smile', 'grin', 'smirk', 'clap of his hands', 'slight jig', 'nervous laugh'],
     'studentaction': ['listened in rapt attention', 
                       'sat straighter in their seats',
+                      'watched quietly',
                       'stifled their yawns',
                       'sniggered',
                       'suppressed giggles'],
@@ -111,7 +112,7 @@ def sorted_links(page):
             locs[l]=loc
     return list({k: v for k, v in sorted(locs.items(), key=lambda item: item[1])}.keys())
 
-def lecture_loop(page, limit=5000, threshold=0.33, nest_ratio=0.95, ):
+def lecture_loop(page, limit=5000, threshold=0.30, nest_ratio=0.8):
     """The main lecture loop function
     page: The Wikipedia page being discussed
     limit: The character limit
@@ -138,7 +139,7 @@ def lecture_loop(page, limit=5000, threshold=0.33, nest_ratio=0.95, ):
                 if continuation:
                     output += '-'
                 output += c[start:loc]+' -"'
-                start = loc
+                start = loc - len(l)
                 
                 if np.random.rand()>threshold:
                     temp = '\n\n"What\'s '+l+'?"'+grammar.flatten("#ask#")
@@ -181,7 +182,7 @@ while len(out.split())<51000:
 
         i += 1
 
-        text_file = open("NaNoGenMo.md", "w", encoding="utf-8")
+        text_file = open("NaNoGenMo v3.md", "w", encoding="utf-8")
         text_file.write(out)
         text_file.close()
     except:
