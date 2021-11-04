@@ -112,7 +112,7 @@ def sorted_links(page):
             locs[l]=loc
     return list({k: v for k, v in sorted(locs.items(), key=lambda item: item[1])}.keys())
 
-def lecture_loop(page, limit=5000, threshold=0.30, nest_ratio=0.8):
+def lecture_loop(page, limit=5000, threshold=0.25, nest_ratio=0.8):
     """The main lecture loop function
     page: The Wikipedia page being discussed
     limit: The character limit
@@ -137,7 +137,7 @@ def lecture_loop(page, limit=5000, threshold=0.30, nest_ratio=0.8):
                 # Parse to sentence later
                 output += '\n\n'+grammar.flatten("#explain2#")
                 if continuation:
-                    output += '-'
+                    output += '- '
                 output += c[start:loc]+' -"'
                 start = loc - len(l)
                 
@@ -177,12 +177,12 @@ while len(out.split())<51000:
         out += '\n\n# Lesson '+str(i)+': '+topic.title
         out += '\n\n"'+grammar.flatten("#intro#")+topic.title+',"'+grammar.flatten("#explain#")
         out += '\n\n'+grammar.flatten('#class#')
-        out += lecture_loop(topic, limit=5000)
+        out += lecture_loop(topic, limit=7500)
         out += '\n\n'+grammar.flatten("#bell#")+'\n\n---'
 
         i += 1
 
-        text_file = open("NaNoGenMo v3.md", "w", encoding="utf-8")
+        text_file = open("NaNoGenMo v4.md", "w", encoding="utf-8")
         text_file.write(out)
         text_file.close()
     except:
@@ -190,6 +190,6 @@ while len(out.split())<51000:
     
 out += '\n# Epilogue\n\nThat concludes the testing logs of the Educator-9000. The robotic instructor has met the requirements set out by the board. Immediate deployment is advised.'
 
-text_file = open("NaNoGenMo.md", "w", encoding="utf-8")
+text_file = open("NaNoGenMo v4.md", "w", encoding="utf-8")
 text_file.write(out)
 text_file.close()
