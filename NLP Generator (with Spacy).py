@@ -18,6 +18,9 @@ from tracery.modifiers import base_english
 
 import spacy
 
+import language_tool_python
+tool = language_tool_python.LanguageTool('en-US')
+
 nlp = spacy.load("en_core_web_sm", disable=["tok2vec", "tagger", "parser", "attribute_ruler", "lemmatizer"])
 
 rules = {
@@ -148,10 +151,14 @@ def lecture_loop(page, limit=5000, threshold=0.275, nest_ratio=0.8):
                 output += c[start:loc]+' -"'
                 start = loc - len(l)
                 
-                if np.random.rand()>threshold:
-                    temp = '\n\n"What\'s '+l+'?"'+grammar.flatten("#ask#")
+                if np.random.rand()>threshold*2:
+                    ent = ents.get(l)
+                    if ent == 'PERSON':
+                        temp = '\n\n"Who\'s '+l+'?"'+grammar.flatten("#ask#")
+                    else:
+                        temp = '\n\n"What\'s '+l+'?"'+grammar.flatten("#ask#")
                     output += temp
-                    if np.random.rand()>threshold:
+                    if np.random.rand()>threshold*0.5:
                         try:
                             output += '\n\n'+grammar.flatten('#acknowledge#')
                             output += lecture_loop(wikipedia.page(l), limit=int(limit*nest_ratio))
@@ -176,7 +183,7 @@ def lecture_loop(page, limit=5000, threshold=0.275, nest_ratio=0.8):
 out = '# Prologue\nThe following is a transcript from the pilot test of the Educator-9000, the world\'s most advanced robotic teacher. No children were harmed in the process. We promise.'
 out += '\n\n---'
 i = 1
-while len(out.split())<51000:
+while len(out.split())<52000:
     try:
         topic = wikipedia.page(wikipedia.random())
 
@@ -189,7 +196,9 @@ while len(out.split())<51000:
 
         i += 1
 
-        text_file = open("NaNoGenMo v5.md", "w", encoding="utf-8")
+        tool.correct(out)
+
+        text_file = open("NaNoGenMo v6.md", "w", encoding="utf-8")
         text_file.write(out)
         text_file.close()
     except:
@@ -197,6 +206,6 @@ while len(out.split())<51000:
     
 out += '\n# Epilogue\n\nThat concludes the testing logs of the Educator-9000. The robotic instructor has met the requirements set out by the board. Immediate deployment is advised.'
 
-text_file = open("NaNoGenMo v5.md", "w", encoding="utf-8")
+text_file = open("NaNoGenMo v6.md", "w", encoding="utf-8")
 text_file.write(out)
 text_file.close()
