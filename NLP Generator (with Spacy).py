@@ -198,7 +198,7 @@ while len(out.split())<52000:
 
         tool.correct(out)
 
-        text_file = open("NaNoGenMo v6.md", "w", encoding="utf-8")
+        text_file = open("NaNoGenMo v8.md", "w", encoding="utf-8")
         text_file.write(out)
         text_file.close()
     except:
@@ -206,6 +206,6 @@ while len(out.split())<52000:
     
 out += '\n# Epilogue\n\nThat concludes the testing logs of the Educator-9000. The robotic instructor has met the requirements set out by the board. Immediate deployment is advised.'
 
-text_file = open("NaNoGenMo v6.md", "w", encoding="utf-8")
+text_file = open("NaNoGenMo v8.md", "w", encoding="utf-8")
 text_file.write(out)
 text_file.close()
